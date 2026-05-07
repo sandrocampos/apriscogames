@@ -579,19 +579,39 @@
 
   function renderRanking(ranking) {
     const container = document.getElementById("ranking-list");
+  
     if (!ranking.length) {
       container.innerHTML = '<div class="loading">Ainda não há dados. Quando o primeiro encontro acontecer, o ranking aparece aqui.</div>';
       return;
     }
-    container.innerHTML = ranking.map((p, i) => {
-      const podiumClass = i < 3 ? `podium-${i + 1}` : "";
-      const pos = i + 1;
+  
+    // 1. Ordena por XP DESC e nome ASC (desempate)
+    const sorted = [...ranking].sort((a, b) => {
+      if (b.xp !== a.xp) return b.xp - a.xp;
+      return a.nome.localeCompare(b.nome, 'pt-BR');
+    });
+  
+    let lastXp = null;
+    let lastPos = 0;
+  
+    container.innerHTML = sorted.map((p, i) => {
+      // 2. Calcula posição com empate
+      let pos;
+      if (p.xp === lastXp) {
+        pos = lastPos;
+      } else {
+        pos = i + 1;
+        lastPos = pos;
+        lastXp = p.xp;
+      }
+  
+      const podiumClass = pos <= 3 ? `podium-${pos}` : "";
       const medal = pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : pos;
-
+  
       const topJogos = Object.entries(p.jogosVencidos)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
-
+  
       const detalhe = `
         <div class="player-detail">
           <h4>📊 ESTATÍSTICAS</h4>
@@ -606,7 +626,7 @@
           ` : ""}
         </div>
       `;
-
+  
       return `
         <div class="player-card ${podiumClass}" onclick="this.classList.toggle('expanded')">
           <div class="position">${medal}</div>
