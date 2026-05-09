@@ -948,6 +948,9 @@
         <select id="jogos-jogadores" class="jogos-select">
           <option value="">👥 Nº de jogadores</option>
         </select>
+        <select id="jogos-duracao" class="jogos-select">
+          <option value="">⏱ Duração</option>
+        </select>
       </div>
       <div id="jogos-count" class="jogos-count"></div>
       <div id="jogos-list">
@@ -1349,14 +1352,18 @@
       // Popula selects com valores únicos
       const donoSelect = document.getElementById("jogos-dono");
       const jogadoresSelect = document.getElementById("jogos-jogadores");
+      const duracaoSelect = document.getElementById("jogos-duracao");
       const todosDonosSalvo = donoSelect.value;
       const todosJogadoresSalvo = jogadoresSelect.value;
+      const todosDuracaoSalvo = duracaoSelect.value;
 
       const todosDonosSet = new Set();
       const todosJogadoresSet = new Set();
+      const todosDuracaoSet = new Set();
       sorted.forEach(j => {
         j.donos.forEach(d => todosDonosSet.add(d));
         if (j.jogadores) todosJogadoresSet.add(j.jogadores);
+        if (j.duracao) todosDuracaoSet.add(j.duracao);
       });
 
       donoSelect.innerHTML = '<option value="">👤 Todos os donos</option>' +
@@ -1366,6 +1373,10 @@
       jogadoresSelect.innerHTML = '<option value="">👥 Nº de jogadores</option>' +
         [...todosJogadoresSet].sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
           .map(v => `<option value="${escapeHtml(v)}"${v === todosJogadoresSalvo ? " selected" : ""}>${escapeHtml(v)}</option>`).join("");
+
+      duracaoSelect.innerHTML = '<option value="">⏱ Duração</option>' +
+        [...todosDuracaoSet].sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
+          .map(v => `<option value="${escapeHtml(v)}"${v === todosDuracaoSalvo ? " selected" : ""}>${escapeHtml(v)}</option>`).join("");
 
       function cardHtml(j) {
         const coverHtml = j.imagem
@@ -1389,11 +1400,13 @@
         const busca = document.getElementById("jogos-busca").value.trim().toLowerCase();
         const dono = donoSelect.value;
         const jogadoresFiltro = jogadoresSelect.value;
+        const duracaoFiltro = duracaoSelect.value;
 
         const filtered = sorted.filter(j => {
           if (busca && !j.nome.toLowerCase().includes(busca)) return false;
           if (dono && !j.donos.includes(dono)) return false;
           if (jogadoresFiltro && j.jogadores !== jogadoresFiltro) return false;
+          if (duracaoFiltro && j.duracao !== duracaoFiltro) return false;
           return true;
         });
 
@@ -1409,6 +1422,7 @@
       document.getElementById("jogos-busca").addEventListener("input", applyFilters);
       donoSelect.addEventListener("change", applyFilters);
       jogadoresSelect.addEventListener("change", applyFilters);
+      duracaoSelect.addEventListener("change", applyFilters);
 
       applyFilters();
     }
