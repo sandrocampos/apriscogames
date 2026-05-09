@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
   <meta name="description" content="Ranking oficial do grupo evangélico de jogos de tabuleiro Aprisco">
   <meta property="og:title" content="Jogos Aprisco · Ranking">
   <meta property="og:description" content="Acompanhe a temporada 2026 do nosso grupo de jogos de tabuleiro!">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎲%3C/text%3E%3C/svg%3E">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎲%3C/text%3E%3C/svg%3E">
 
   <!-- CONFIG: URLs CSV publicadas do Google Sheets -->
   <script>
     window.SHEET_PRESENCAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=0&single=true&output=csv";
-    window.SHEET_PARTIDAS_URL  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=2096696200&single=true&output=csv";
-    window.SHEET_JOGOS_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=205760515&single=true&output=csv";
+    window.SHEET_PARTIDAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=2096696200&single=true&output=csv";
+    window.SHEET_JOGOS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=205760515&single=true&output=csv";
   </script>
 
   <style>
@@ -42,7 +44,11 @@
       --border: rgba(95, 94, 90, 0.25);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
@@ -55,7 +61,10 @@
       padding: 20px 16px;
     }
 
-    .container { max-width: 760px; margin: 0 auto; }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+    }
 
     .header {
       background: var(--purple-50);
@@ -65,9 +74,28 @@
       text-align: center;
       margin-bottom: 28px;
     }
-    .header .stars { font-size: 18px; color: var(--purple-600); letter-spacing: 8px; margin-bottom: 12px; }
-    .header h1 { font-size: clamp(36px, 8vw, 56px); font-weight: 800; color: var(--purple-900); letter-spacing: 1px; line-height: 1; }
-    .header .subtitle { font-family: ui-monospace, "SF Mono", Menlo, monospace; color: var(--purple-600); font-size: 14px; margin-top: 8px; }
+
+    .header .stars {
+      font-size: 18px;
+      color: var(--purple-600);
+      letter-spacing: 8px;
+      margin-bottom: 12px;
+    }
+
+    .header h1 {
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 800;
+      color: var(--purple-900);
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    .header .subtitle {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      color: var(--purple-600);
+      font-size: 14px;
+      margin-top: 8px;
+    }
 
     .tabs {
       display: flex;
@@ -79,6 +107,7 @@
       margin-bottom: 20px;
       overflow-x: auto;
     }
+
     .tab {
       flex: 1;
       min-width: max-content;
@@ -94,15 +123,40 @@
       transition: all 0.15s;
       white-space: nowrap;
     }
-    .tab:hover { background: rgba(83, 74, 183, 0.08); }
-    .tab.active { background: var(--purple-600); color: white; }
 
-    .panel { display: none; }
-    .panel.active { display: block; }
+    .tab:hover {
+      background: rgba(83, 74, 183, 0.08);
+    }
 
-    .section-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-    .section-divider { border: none; border-top: 2px dashed var(--purple-600); opacity: 0.4; margin: 8px 0 18px 0; }
-    .section-spacer { margin-top: 28px; }
+    .tab.active {
+      background: var(--purple-600);
+      color: white;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 2px dashed var(--purple-600);
+      opacity: 0.4;
+      margin: 8px 0 18px 0;
+    }
+
+    .section-spacer {
+      margin-top: 28px;
+    }
 
     .player-card {
       background: var(--card-bg);
@@ -117,39 +171,126 @@
       cursor: pointer;
       transition: all 0.15s;
     }
-    .player-card:hover { border-color: var(--purple-600); transform: translateY(-1px); }
-    .player-card.podium-1 { background: linear-gradient(to right, var(--coral-50), var(--card-bg) 50%); }
-    .player-card.podium-2 { background: linear-gradient(to right, var(--amber-50), var(--card-bg) 50%); }
-    .player-card.podium-3 { background: linear-gradient(to right, var(--teal-50), var(--card-bg) 50%); }
+
+    .player-card:hover {
+      border-color: var(--purple-600);
+      transform: translateY(-1px);
+    }
+
+    .player-card.podium-1 {
+      background: linear-gradient(to right, var(--coral-50), var(--card-bg) 50%);
+    }
+
+    .player-card.podium-2 {
+      background: linear-gradient(to right, var(--amber-50), var(--card-bg) 50%);
+    }
+
+    .player-card.podium-3 {
+      background: linear-gradient(to right, var(--teal-50), var(--card-bg) 50%);
+    }
 
     .position {
-      width: 44px; height: 44px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 18px;
-      background: var(--gray-50); color: var(--gray-800);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      background: var(--gray-50);
+      color: var(--gray-800);
       border: 2px solid var(--gray-600);
       flex-shrink: 0;
     }
-    .podium-1 .position { background: var(--coral-50); color: var(--coral-800); border-color: var(--coral-600); }
-    .podium-2 .position { background: var(--amber-50); color: var(--amber-800); border-color: var(--amber-600); }
-    .podium-3 .position { background: var(--teal-50); color: var(--teal-800); border-color: var(--teal-600); }
 
-    .player-info { min-width: 0; }
-    .player-name { font-weight: 700; font-size: 17px; margin-bottom: 4px; }
-    .player-meta { font-size: 13px; color: var(--text-secondary); display: flex; gap: 12px; flex-wrap: wrap; }
+    .podium-1 .position {
+      background: var(--coral-50);
+      color: var(--coral-800);
+      border-color: var(--coral-600);
+    }
+
+    .podium-2 .position {
+      background: var(--amber-50);
+      color: var(--amber-800);
+      border-color: var(--amber-600);
+    }
+
+    .podium-3 .position {
+      background: var(--teal-50);
+      color: var(--teal-800);
+      border-color: var(--teal-600);
+    }
+
+    .player-info {
+      min-width: 0;
+    }
+
+    .player-name {
+      font-weight: 700;
+      font-size: 17px;
+      margin-bottom: 4px;
+    }
+
+    .player-meta {
+      font-size: 13px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
     .level-badge {
-      padding: 4px 10px; border-radius: 6px;
-      font-size: 12px; font-weight: 700; letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
     }
-    .level-1 { background: var(--gray-50); color: var(--gray-800); border: 1px solid var(--gray-600); }
-    .level-2 { background: var(--teal-50); color: var(--teal-800); border: 1px solid var(--teal-600); }
-    .level-3 { background: var(--amber-50); color: var(--amber-800); border: 1px solid var(--amber-600); }
-    .level-4 { background: var(--coral-50); color: var(--coral-800); border: 1px solid var(--coral-600); }
 
-    .xp-display { text-align: right; flex-shrink: 0; }
-    .xp-value { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 22px; font-weight: 700; color: var(--purple-800); line-height: 1; }
-    .xp-label { font-size: 11px; color: var(--text-secondary); letter-spacing: 1px; margin-top: 2px; }
+    .level-1 {
+      background: var(--gray-50);
+      color: var(--gray-800);
+      border: 1px solid var(--gray-600);
+    }
+
+    .level-2 {
+      background: var(--teal-50);
+      color: var(--teal-800);
+      border: 1px solid var(--teal-600);
+    }
+
+    .level-3 {
+      background: var(--amber-50);
+      color: var(--amber-800);
+      border: 1px solid var(--amber-600);
+    }
+
+    .level-4 {
+      background: var(--coral-50);
+      color: var(--coral-800);
+      border: 1px solid var(--coral-600);
+    }
+
+    .xp-display {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .xp-value {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--purple-800);
+      line-height: 1;
+    }
+
+    .xp-label {
+      font-size: 11px;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
 
     .player-detail {
       grid-column: 1 / -1;
@@ -159,7 +300,11 @@
       font-size: 13px;
       display: none;
     }
-    .player-card.expanded .player-detail { display: block; }
+
+    .player-card.expanded .player-detail {
+      display: block;
+    }
+
     .player-detail h4 {
       font-size: 12px;
       font-family: ui-monospace, monospace;
@@ -168,63 +313,181 @@
       margin-bottom: 6px;
       margin-top: 8px;
     }
-    .player-detail h4:first-child { margin-top: 0; }
+
+    .player-detail h4:first-child {
+      margin-top: 0;
+    }
+
     .player-detail .stat-row {
       display: flex;
       justify-content: space-between;
       padding: 3px 0;
       color: var(--text-secondary);
     }
-    .player-detail .stat-row strong { color: var(--text-primary); font-weight: 600; }
 
-    .loading { text-align: center; padding: 40px 20px; color: var(--text-secondary); font-family: ui-monospace, monospace; }
-    .error { background: var(--coral-50); border: 1px solid var(--coral-600); color: var(--coral-800); padding: 16px; border-radius: 12px; text-align: center; }
+    .player-detail .stat-row strong {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
 
-    .levels-grid { display: grid; gap: 12px; }
+    .loading {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      font-family: ui-monospace, monospace;
+    }
+
+    .error {
+      background: var(--coral-50);
+      border: 1px solid var(--coral-600);
+      color: var(--coral-800);
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .levels-grid {
+      display: grid;
+      gap: 12px;
+    }
+
     .level-card {
       background: var(--card-bg);
       border: 2px solid;
       border-radius: 12px;
       padding: 16px 18px;
-      display: flex; gap: 16px; align-items: center;
+      display: flex;
+      gap: 16px;
+      align-items: center;
     }
-    .level-card-1 { background: var(--gray-50); border-color: var(--gray-600); }
-    .level-card-2 { background: var(--teal-50); border-color: var(--teal-600); }
-    .level-card-3 { background: var(--amber-50); border-color: var(--amber-600); }
-    .level-card-4 { background: var(--coral-50); border-color: var(--coral-600); }
+
+    .level-card-1 {
+      background: var(--gray-50);
+      border-color: var(--gray-600);
+    }
+
+    .level-card-2 {
+      background: var(--teal-50);
+      border-color: var(--teal-600);
+    }
+
+    .level-card-3 {
+      background: var(--amber-50);
+      border-color: var(--amber-600);
+    }
+
+    .level-card-4 {
+      background: var(--coral-50);
+      border-color: var(--coral-600);
+    }
 
     .level-number {
-      width: 50px; height: 50px; border-radius: 50%;
-      background: white; border: 2px solid;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 22px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
       flex-shrink: 0;
     }
-    .level-card-1 .level-number { border-color: var(--gray-600); color: var(--gray-800); }
-    .level-card-2 .level-number { border-color: var(--teal-600); color: var(--teal-800); }
-    .level-card-3 .level-number { border-color: var(--amber-600); color: var(--amber-800); }
-    .level-card-4 .level-number { border-color: var(--coral-600); color: var(--coral-800); }
 
-    .level-info { flex: 1; min-width: 0; }
-    .level-name { font-size: 12px; font-family: ui-monospace, monospace; font-weight: 700; letter-spacing: 1px; opacity: 0.7; }
-    .level-title { font-size: 22px; font-weight: 800; letter-spacing: 0.5px; }
-    .level-card-1 .level-title { color: var(--gray-800); }
-    .level-card-2 .level-title { color: var(--teal-800); }
-    .level-card-3 .level-title { color: var(--amber-800); }
-    .level-card-4 .level-title { color: var(--coral-800); }
-    .level-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+    .level-card-1 .level-number {
+      border-color: var(--gray-600);
+      color: var(--gray-800);
+    }
+
+    .level-card-2 .level-number {
+      border-color: var(--teal-600);
+      color: var(--teal-800);
+    }
+
+    .level-card-3 .level-number {
+      border-color: var(--amber-600);
+      color: var(--amber-800);
+    }
+
+    .level-card-4 .level-number {
+      border-color: var(--coral-600);
+      color: var(--coral-800);
+    }
+
+    .level-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .level-name {
+      font-size: 12px;
+      font-family: ui-monospace, monospace;
+      font-weight: 700;
+      letter-spacing: 1px;
+      opacity: 0.7;
+    }
+
+    .level-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .level-card-1 .level-title {
+      color: var(--gray-800);
+    }
+
+    .level-card-2 .level-title {
+      color: var(--teal-800);
+    }
+
+    .level-card-3 .level-title {
+      color: var(--amber-800);
+    }
+
+    .level-card-4 .level-title {
+      color: var(--coral-800);
+    }
+
+    .level-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
     .level-xp-badge {
       font-family: ui-monospace, monospace;
-      font-weight: 700; font-size: 14px;
-      padding: 6px 12px; border-radius: 8px;
-      color: white; flex-shrink: 0;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      color: white;
+      flex-shrink: 0;
     }
-    .level-card-1 .level-xp-badge { background: var(--gray-800); }
-    .level-card-2 .level-xp-badge { background: var(--teal-800); }
-    .level-card-3 .level-xp-badge { background: var(--amber-800); }
-    .level-card-4 .level-xp-badge { background: var(--coral-800); }
 
-    .xp-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+    .level-card-1 .level-xp-badge {
+      background: var(--gray-800);
+    }
+
+    .level-card-2 .level-xp-badge {
+      background: var(--teal-800);
+    }
+
+    .level-card-3 .level-xp-badge {
+      background: var(--amber-800);
+    }
+
+    .level-card-4 .level-xp-badge {
+      background: var(--coral-800);
+    }
+
+    .xp-rules {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
     .xp-rule {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -235,12 +498,39 @@
       align-items: center;
       gap: 12px;
     }
-    .xp-rule-info { min-width: 0; }
-    .xp-rule-title { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
-    .xp-rule-desc { font-size: 12px; color: var(--text-secondary); }
-    .xp-rule-value { font-family: ui-monospace, monospace; font-weight: 700; color: var(--purple-600); font-size: 18px; flex-shrink: 0; }
-    .xp-rule-special { grid-column: 1 / -1; background: var(--purple-50); border-color: var(--purple-600); }
-    .xp-rule-special .xp-rule-value { color: var(--purple-800); }
+
+    .xp-rule-info {
+      min-width: 0;
+    }
+
+    .xp-rule-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .xp-rule-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .xp-rule-value {
+      font-family: ui-monospace, monospace;
+      font-weight: 700;
+      color: var(--purple-600);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .xp-rule-special {
+      grid-column: 1 / -1;
+      background: var(--purple-50);
+      border-color: var(--purple-600);
+    }
+
+    .xp-rule-special .xp-rule-value {
+      color: var(--purple-800);
+    }
 
     .history-encounter {
       background: var(--card-bg);
@@ -249,8 +539,21 @@
       padding: 16px 18px;
       margin-bottom: 14px;
     }
-    .history-date { font-family: ui-monospace, monospace; font-size: 13px; color: var(--purple-600); font-weight: 700; margin-bottom: 4px; }
-    .history-event-name { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+
+    .history-date {
+      font-family: ui-monospace, monospace;
+      font-size: 13px;
+      color: var(--purple-600);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .history-event-name {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
     .history-presencas {
       font-size: 13px;
       color: var(--text-secondary);
@@ -258,13 +561,49 @@
       padding-bottom: 10px;
       border-bottom: 1px dashed var(--border);
     }
-    .history-presencas strong { color: var(--text-primary); }
+
+    .history-presencas strong {
+      color: var(--text-primary);
+    }
 
     .history-game {
       padding: 8px 0;
       border-top: 1px dashed var(--border);
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
     }
-    .history-game:first-of-type { border-top: none; }
+
+    .history-game:first-of-type {
+      border-top: none;
+    }
+
+    .history-game-cover {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: var(--border);
+    }
+
+    .history-game-cover-placeholder {
+      width: 48px;
+      height: 48px;
+      border-radius: 6px;
+      flex-shrink: 0;
+      background: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    .history-game-body {
+      flex: 1;
+      min-width: 0;
+    }
+
     .history-game-header {
       display: flex;
       justify-content: space-between;
@@ -272,18 +611,28 @@
       gap: 12px;
       margin-bottom: 4px;
     }
+
     .history-game-name {
       font-weight: 700;
       font-size: 15px;
     }
+
     .history-game-meta {
       font-family: ui-monospace, monospace;
       font-size: 12px;
       color: var(--text-secondary);
       flex-shrink: 0;
     }
-    .history-game-detail { font-size: 13px; color: var(--text-secondary); }
-    .history-winner { font-weight: 700; color: var(--coral-800); }
+
+    .history-game-detail {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .history-winner {
+      font-weight: 700;
+      color: var(--coral-800);
+    }
 
     .stat-card {
       background: var(--card-bg);
@@ -292,6 +641,7 @@
       padding: 16px 18px;
       margin-bottom: 14px;
     }
+
     .stat-card-title {
       font-size: 14px;
       font-family: ui-monospace, monospace;
@@ -300,6 +650,7 @@
       font-weight: 700;
       margin-bottom: 12px;
     }
+
     .stat-row-game {
       display: flex;
       justify-content: space-between;
@@ -308,9 +659,21 @@
       border-top: 1px dashed var(--border);
       gap: 12px;
     }
-    .stat-row-game:first-of-type { border-top: none; }
-    .stat-game-name { font-weight: 600; font-size: 14px; }
-    .stat-game-detail { font-size: 12px; color: var(--text-secondary); }
+
+    .stat-row-game:first-of-type {
+      border-top: none;
+    }
+
+    .stat-game-name {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .stat-game-detail {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
     .stat-game-count {
       font-family: ui-monospace, monospace;
       font-weight: 700;
@@ -328,23 +691,72 @@
       flex-shrink: 0;
       border: 1px solid var(--border);
     }
-    .stat-row-game { align-items: center; }
 
-    .footer { margin-top: 32px; text-align: center; padding: 24px 16px; }
-    .verse { font-style: italic; max-width: 480px; margin: 0 auto 12px; font-size: 15px; }
-    .verse-ref { font-family: ui-monospace, monospace; font-weight: 700; color: var(--purple-600); font-size: 13px; letter-spacing: 1px; }
-    .footer-tag { font-family: ui-monospace, monospace; font-size: 12px; color: var(--text-secondary); margin-top: 16px; }
+    .stat-row-game {
+      align-items: center;
+    }
+
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      padding: 24px 16px;
+    }
+
+    .verse {
+      font-style: italic;
+      max-width: 480px;
+      margin: 0 auto 12px;
+      font-size: 15px;
+    }
+
+    .verse-ref {
+      font-family: ui-monospace, monospace;
+      font-weight: 700;
+      color: var(--purple-600);
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .footer-tag {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 16px;
+    }
 
     @media (max-width: 480px) {
-      .player-card { grid-template-columns: auto 1fr; gap: 12px; }
-      .xp-display { grid-column: 2 / -1; text-align: left; margin-top: 4px; }
-      .xp-value { font-size: 18px; }
-      .level-card { padding: 14px; gap: 12px; }
-      .level-title { font-size: 18px; }
-      .history-game-header { flex-direction: column; gap: 2px; }
+      .player-card {
+        grid-template-columns: auto 1fr;
+        gap: 12px;
+      }
+
+      .xp-display {
+        grid-column: 2 / -1;
+        text-align: left;
+        margin-top: 4px;
+      }
+
+      .xp-value {
+        font-size: 18px;
+      }
+
+      .level-card {
+        padding: 14px;
+        gap: 12px;
+      }
+
+      .level-title {
+        font-size: 18px;
+      }
+
+      .history-game-header {
+        flex-direction: column;
+        gap: 2px;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="container">
 
@@ -364,7 +776,8 @@
     <section class="panel active" id="panel-ranking">
       <h2 class="section-title">Classificação geral</h2>
       <hr class="section-divider">
-      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">Toque em um jogador para ver detalhes.</p>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">Toque em um jogador para ver
+        detalhes.</p>
       <div id="ranking-list">
         <div class="loading">⏳ carregando o aprisco...</div>
       </div>
@@ -392,22 +805,38 @@
       <div class="levels-grid">
         <div class="level-card level-card-1">
           <div class="level-number">1</div>
-          <div class="level-info"><div class="level-name">LV.1</div><div class="level-title">OVELHA</div><div class="level-desc">recém-chegada · começa a aventura</div></div>
+          <div class="level-info">
+            <div class="level-name">LV.1</div>
+            <div class="level-title">OVELHA</div>
+            <div class="level-desc">recém-chegada · começa a aventura</div>
+          </div>
           <div class="level-xp-badge">0–49 XP</div>
         </div>
         <div class="level-card level-card-2">
           <div class="level-number">2</div>
-          <div class="level-info"><div class="level-name">LV.2</div><div class="level-title">DISCÍPULO</div><div class="level-desc">já pegou o jeito · presença firme</div></div>
+          <div class="level-info">
+            <div class="level-name">LV.2</div>
+            <div class="level-title">DISCÍPULO</div>
+            <div class="level-desc">já pegou o jeito · presença firme</div>
+          </div>
           <div class="level-xp-badge">50–99 XP</div>
         </div>
         <div class="level-card level-card-3">
           <div class="level-number">3</div>
-          <div class="level-info"><div class="level-name">LV.3</div><div class="level-title">PROFETA</div><div class="level-desc">prevê jogadas · referência</div></div>
+          <div class="level-info">
+            <div class="level-name">LV.3</div>
+            <div class="level-title">PROFETA</div>
+            <div class="level-desc">prevê jogadas · referência</div>
+          </div>
           <div class="level-xp-badge">100–159 XP</div>
         </div>
         <div class="level-card level-card-4">
           <div class="level-number">4</div>
-          <div class="level-info"><div class="level-name">LV.4</div><div class="level-title">APÓSTOLO</div><div class="level-desc">o lendário do tabuleiro</div></div>
+          <div class="level-info">
+            <div class="level-name">LV.4</div>
+            <div class="level-title">APÓSTOLO</div>
+            <div class="level-desc">o lendário do tabuleiro</div>
+          </div>
           <div class="level-xp-badge">160+ XP</div>
         </div>
       </div>
@@ -415,216 +844,247 @@
       <h2 class="section-title section-spacer">Sistema de XP por encontro</h2>
       <hr class="section-divider">
       <div class="xp-rules">
-        <div class="xp-rule"><div class="xp-rule-info"><div class="xp-rule-title">🎲 Presença</div><div class="xp-rule-desc">só de aparecer no encontro</div></div><div class="xp-rule-value">+10</div></div>
-        <div class="xp-rule"><div class="xp-rule-info"><div class="xp-rule-title">🏆 Vitória rápida</div><div class="xp-rule-desc">partida até 60 min</div></div><div class="xp-rule-value">+3</div></div>
-        <div class="xp-rule"><div class="xp-rule-info"><div class="xp-rule-title">⚔️ Vitória média</div><div class="xp-rule-desc">partida até 90 min</div></div><div class="xp-rule-value">+6</div></div>
-        <div class="xp-rule"><div class="xp-rule-info"><div class="xp-rule-title">🐉 Vitória épica</div><div class="xp-rule-desc">mais de 90 min</div></div><div class="xp-rule-value">+10</div></div>
-        <div class="xp-rule xp-rule-special"><div class="xp-rule-info"><div class="xp-rule-title">✨ Vitória adicional no mesmo dia</div><div class="xp-rule-desc">conta a vitória mais longa do dia · bônus pelas extras</div></div><div class="xp-rule-value">+2 · máx +4</div></div>
+        <div class="xp-rule">
+          <div class="xp-rule-info">
+            <div class="xp-rule-title">🎲 Presença</div>
+            <div class="xp-rule-desc">só de aparecer no encontro</div>
+          </div>
+          <div class="xp-rule-value">+10</div>
+        </div>
+        <div class="xp-rule">
+          <div class="xp-rule-info">
+            <div class="xp-rule-title">🏆 Vitória rápida</div>
+            <div class="xp-rule-desc">partida até 60 min</div>
+          </div>
+          <div class="xp-rule-value">+1</div>
+        </div>
+        <div class="xp-rule">
+          <div class="xp-rule-info">
+            <div class="xp-rule-title">⚔️ Vitória média</div>
+            <div class="xp-rule-desc">partida até 90 min</div>
+          </div>
+          <div class="xp-rule-value">+2</div>
+        </div>
+        <div class="xp-rule">
+          <div class="xp-rule-info">
+            <div class="xp-rule-title">🐉 Vitória épica</div>
+            <div class="xp-rule-desc">mais de 90 min</div>
+          </div>
+          <div class="xp-rule-value">+3</div>
+        </div>
+        <div class="xp-rule xp-rule-special">
+          <div class="xp-rule-info">
+            <div class="xp-rule-title">✨ Vitória adicional no mesmo dia</div>
+            <div class="xp-rule-desc">conta a vitória mais longa do dia · bônus pelas extras</div>
+          </div>
+          <div class="xp-rule-value">+2 · máx +4</div>
+        </div>
       </div>
     </section>
 
     <footer class="footer">
-      <p class="verse">"E consideremo-nos uns aos outros para nos incentivarmos ao amor e às boas obras. Não deixemos de nos reunir…"</p>
+      <p class="verse">"E consideremo-nos uns aos outros para nos incentivarmos ao amor e às boas obras. Não deixemos de
+        nos reunir…"</p>
       <div class="verse-ref">Hebreus 10:24-25</div>
       <div class="footer-tag">[ press start · que ganhe o melhor ]</div>
     </footer>
 
   </div>
 
-<script>
-  const LEVELS = [
-    { name: "OVELHA", min: 0, max: 49, level: 1 },
-    { name: "DISCÍPULO", min: 50, max: 99, level: 2 },
-    { name: "PROFETA", min: 100, max: 159, level: 3 },
-    { name: "APÓSTOLO", min: 160, max: Infinity, level: 4 },
-  ];
+  <script>
+    const LEVELS = [
+      { name: "OVELHA", min: 0, max: 49, level: 1 },
+      { name: "DISCÍPULO", min: 50, max: 99, level: 2 },
+      { name: "PROFETA", min: 100, max: 159, level: 3 },
+      { name: "APÓSTOLO", min: 160, max: Infinity, level: 4 },
+    ];
 
-  const POINTS = {
-    presenca: 10,
-    vitoria_rapida: 3,
-    vitoria_media: 6,
-    vitoria_epica: 10,
-    vitoria_extra: 2,
-    extra_max: 4,
-  };
-
-  function getLevel(xp) {
-    return LEVELS.find(l => xp >= l.min && xp <= l.max);
-  }
-
-  function xpFromDuration(minutes) {
-    const m = parseInt(minutes, 10);
-    if (isNaN(m) || m <= 0) return 0;
-    if (m <= 60) return POINTS.vitoria_rapida;
-    if (m <= 90) return POINTS.vitoria_media;
-    return POINTS.vitoria_epica;
-  }
-
-  function parseCSV(text) {
-    const lines = text.trim().split(/\r?\n/);
-    const parseLine = (line) => {
-      const result = [];
-      let current = "";
-      let inQuotes = false;
-      for (let i = 0; i < line.length; i++) {
-        const c = line[i];
-        if (c === '"' && line[i + 1] === '"') { current += '"'; i++; }
-        else if (c === '"') { inQuotes = !inQuotes; }
-        else if (c === ',' && !inQuotes) { result.push(current.trim()); current = ""; }
-        else { current += c; }
-      }
-      result.push(current.trim());
-      return result;
+    const POINTS = {
+      presenca: 10,
+      vitoria_rapida: 1,
+      vitoria_media: 2,
+      vitoria_epica: 3,
+      vitoria_extra: 1,
+      extra_max: 2,
     };
-    const headers = parseLine(lines[0]).map(h => h.toLowerCase().trim());
-    return lines.slice(1).filter(l => l.trim()).map(line => {
-      const values = parseLine(line);
-      const row = {};
-      headers.forEach((h, i) => row[h] = values[i] || "");
-      return row;
-    });
-  }
 
-  function splitNames(s) {
-    if (!s) return [];
-    return s.split(/[,;]/).map(n => n.trim()).filter(Boolean);
-  }
-
-  function processData(presencas, partidas) {
-    const players = {};
-    const encounters = {};
-
-    function getPlayer(nome) {
-      if (!players[nome]) {
-        players[nome] = {
-          xp: 0,
-          encontros: new Set(),
-          vitorias: 0,
-          partidasJogadas: 0,
-          jogosVencidos: {},
-          jogosJogados: {},
-        };
-      }
-      return players[nome];
+    function getLevel(xp) {
+      return LEVELS.find(l => xp >= l.min && xp <= l.max);
     }
 
-    function getEncounter(data) {
-      if (!encounters[data]) {
-        encounters[data] = { evento: "", presentes: new Set(), partidas: [], vitoriasPorJogador: {} };
-      }
-      return encounters[data];
+    function xpFromDuration(minutes) {
+      const m = parseInt(minutes, 10);
+      if (isNaN(m) || m <= 0) return 0;
+      if (m <= 60) return POINTS.vitoria_rapida;
+      if (m <= 90) return POINTS.vitoria_media;
+      return POINTS.vitoria_epica;
     }
 
-    presencas.forEach(row => {
-      const data = row.data;
-      const jogador = (row.jogador || "").trim();
-      const evento = (row.evento || "").trim();
-      if (!data || !jogador) return;
+    function parseCSV(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const parseLine = (line) => {
+        const result = [];
+        let current = "";
+        let inQuotes = false;
+        for (let i = 0; i < line.length; i++) {
+          const c = line[i];
+          if (c === '"' && line[i + 1] === '"') { current += '"'; i++; }
+          else if (c === '"') { inQuotes = !inQuotes; }
+          else if (c === ',' && !inQuotes) { result.push(current.trim()); current = ""; }
+          else { current += c; }
+        }
+        result.push(current.trim());
+        return result;
+      };
+      const headers = parseLine(lines[0]).map(h => h.toLowerCase().trim());
+      return lines.slice(1).filter(l => l.trim()).map(line => {
+        const values = parseLine(line);
+        const row = {};
+        headers.forEach((h, i) => row[h] = values[i] || "");
+        return row;
+      });
+    }
 
-      const player = getPlayer(jogador);
-      const enc = getEncounter(data);
+    function splitNames(s) {
+      if (!s) return [];
+      return s.split(/[,;]/).map(n => n.trim()).filter(Boolean);
+    }
 
-      if (!enc.presentes.has(jogador)) {
-        enc.presentes.add(jogador);
-        player.encontros.add(data);
-        player.xp += POINTS.presenca;
+    function processData(presencas, partidas) {
+      const players = {};
+      const encounters = {};
+
+      function getPlayer(nome) {
+        if (!players[nome]) {
+          players[nome] = {
+            xp: 0,
+            encontros: new Set(),
+            vitorias: 0,
+            partidasJogadas: 0,
+            jogosVencidos: {},
+            jogosJogados: {},
+          };
+        }
+        return players[nome];
       }
-      if (evento && !enc.evento) enc.evento = evento;
-    });
 
-    partidas.forEach(row => {
-      const data = row.data;
-      const jogo = (row.jogo || "").trim();
-      const minutos = parseInt(row.minutos, 10) || 0;
-      const vencedor = (row.vencedor || "").trim();
-      const participantes = splitNames(row.participantes);
-      if (!data || !jogo || !vencedor) return;
+      function getEncounter(data) {
+        if (!encounters[data]) {
+          encounters[data] = { evento: "", presentes: new Set(), partidas: [], vitoriasPorJogador: {} };
+        }
+        return encounters[data];
+      }
 
-      const enc = getEncounter(data);
-      enc.partidas.push({ jogo, minutos, vencedor, participantes });
+      presencas.forEach(row => {
+        const data = row.data;
+        const jogador = (row.jogador || "").trim();
+        const evento = (row.evento || "").trim();
+        if (!data || !jogador) return;
 
-      participantes.forEach(p => {
-        const player = getPlayer(p);
-        player.partidasJogadas++;
-        player.jogosJogados[jogo] = (player.jogosJogados[jogo] || 0) + 1;
+        const player = getPlayer(jogador);
+        const enc = getEncounter(data);
+
+        if (!enc.presentes.has(jogador)) {
+          enc.presentes.add(jogador);
+          player.encontros.add(data);
+          player.xp += POINTS.presenca;
+        }
+        if (evento && !enc.evento) enc.evento = evento;
       });
 
-      if (!enc.vitoriasPorJogador[vencedor]) enc.vitoriasPorJogador[vencedor] = [];
-      enc.vitoriasPorJogador[vencedor].push({ jogo, minutos, xp: xpFromDuration(minutos) });
+      partidas.forEach(row => {
+        const data = row.data;
+        const jogo = (row.jogo || "").trim();
+        const minutos = parseInt(row.minutos, 10) || 0;
+        const vencedor = (row.vencedor || "").trim();
+        const participantes = splitNames(row.participantes);
+        if (!data || !jogo || !vencedor) return;
 
-      const winnerPlayer = getPlayer(vencedor);
-      winnerPlayer.vitorias++;
-      winnerPlayer.jogosVencidos[jogo] = (winnerPlayer.jogosVencidos[jogo] || 0) + 1;
-    });
+        const enc = getEncounter(data);
+        enc.partidas.push({ jogo, minutos, vencedor, participantes });
 
-    Object.keys(encounters).forEach(data => {
-      const enc = encounters[data];
-      Object.keys(enc.vitoriasPorJogador).forEach(jogador => {
-        const vits = enc.vitoriasPorJogador[jogador];
-        if (!vits.length) return;
-        vits.sort((a, b) => b.xp - a.xp);
-        const principal = vits[0];
-        const extras = vits.slice(1);
-        const bonus = Math.min(extras.length * POINTS.vitoria_extra, POINTS.extra_max);
-        const totalXp = principal.xp + bonus;
-        getPlayer(jogador).xp += totalXp;
-        enc.vitoriasPorJogador[jogador] = { principal, extras, bonus, totalXp };
+        participantes.forEach(p => {
+          const player = getPlayer(p);
+          player.partidasJogadas++;
+          player.jogosJogados[jogo] = (player.jogosJogados[jogo] || 0) + 1;
+        });
+
+        if (!enc.vitoriasPorJogador[vencedor]) enc.vitoriasPorJogador[vencedor] = [];
+        enc.vitoriasPorJogador[vencedor].push({ jogo, minutos, xp: xpFromDuration(minutos) });
+
+        const winnerPlayer = getPlayer(vencedor);
+        winnerPlayer.vitorias++;
+        winnerPlayer.jogosVencidos[jogo] = (winnerPlayer.jogosVencidos[jogo] || 0) + 1;
       });
-    });
 
-    const ranking = Object.entries(players)
-      .map(([nome, dados]) => ({
-        nome,
-        xp: dados.xp,
-        encontros: dados.encontros.size,
-        vitorias: dados.vitorias,
-        partidasJogadas: dados.partidasJogadas,
-        jogosVencidos: dados.jogosVencidos,
-        jogosJogados: dados.jogosJogados,
-        nivel: getLevel(dados.xp),
-        taxaVitoria: dados.partidasJogadas > 0 ? Math.round((dados.vitorias / dados.partidasJogadas) * 100) : 0,
-      }))
-      .sort((a, b) => b.xp - a.xp);
+      Object.keys(encounters).forEach(data => {
+        const enc = encounters[data];
+        Object.keys(enc.vitoriasPorJogador).forEach(jogador => {
+          const vits = enc.vitoriasPorJogador[jogador];
+          if (!vits.length) return;
+          vits.sort((a, b) => b.xp - a.xp);
+          const principal = vits[0];
+          const extras = vits.slice(1);
+          const bonus = Math.min(extras.length * POINTS.vitoria_extra, POINTS.extra_max);
+          const totalXp = principal.xp + bonus;
+          getPlayer(jogador).xp += totalXp;
+          enc.vitoriasPorJogador[jogador] = { principal, extras, bonus, totalXp };
+        });
+      });
 
-    return { ranking, encounters };
-  }
+      const ranking = Object.entries(players)
+        .map(([nome, dados]) => ({
+          nome,
+          xp: dados.xp,
+          encontros: dados.encontros.size,
+          vitorias: dados.vitorias,
+          partidasJogadas: dados.partidasJogadas,
+          jogosVencidos: dados.jogosVencidos,
+          jogosJogados: dados.jogosJogados,
+          nivel: getLevel(dados.xp),
+          taxaVitoria: dados.partidasJogadas > 0 ? Math.round((dados.vitorias / dados.partidasJogadas) * 100) : 0,
+        }))
+        .sort((a, b) => b.xp - a.xp);
 
-  function renderRanking(ranking) {
-    const container = document.getElementById("ranking-list");
-  
-    if (!ranking.length) {
-      container.innerHTML = '<div class="loading">Ainda não há dados. Quando o primeiro encontro acontecer, o ranking aparece aqui.</div>';
-      return;
+      return { ranking, encounters };
     }
-  
-    // 1. Ordena por XP DESC e nome ASC (desempate)
-    const sorted = [...ranking].sort((a, b) => {
-      if (b.xp !== a.xp) return b.xp - a.xp;
-      return a.nome.localeCompare(b.nome, 'pt-BR');
-    });
-  
-    let lastXp = null;
-    let lastPos = 0;
-  
-    container.innerHTML = sorted.map((p, i) => {
-      // 2. Calcula posição com empate
-      let pos;
-      if (p.xp === lastXp) {
-        pos = lastPos;
-      } else {
-        pos = i + 1;
-        lastPos = pos;
-        lastXp = p.xp;
+
+    function renderRanking(ranking) {
+      const container = document.getElementById("ranking-list");
+
+      if (!ranking.length) {
+        container.innerHTML = '<div class="loading">Ainda não há dados. Quando o primeiro encontro acontecer, o ranking aparece aqui.</div>';
+        return;
       }
-  
-      const podiumClass = pos <= 3 ? `podium-${pos}` : "";
-      const medal = pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : pos;
-  
-      const topJogos = Object.entries(p.jogosVencidos)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 5);
-  
-      const detalhe = `
+
+      // 1. Ordena por XP DESC e nome ASC (desempate)
+      const sorted = [...ranking].sort((a, b) => {
+        if (b.xp !== a.xp) return b.xp - a.xp;
+        return a.nome.localeCompare(b.nome, 'pt-BR');
+      });
+
+      let lastXp = null;
+      let lastPos = 0;
+
+      container.innerHTML = sorted.map((p, i) => {
+        // 2. Calcula posição com empate
+        let pos;
+        if (p.xp === lastXp) {
+          pos = lastPos;
+        } else {
+          pos = i + 1;
+          lastPos = pos;
+          lastXp = p.xp;
+        }
+
+        const podiumClass = pos <= 3 ? `podium-${pos}` : "";
+        const medal = pos === 1 ? "🥇" : pos === 2 ? "🥈" : pos === 3 ? "🥉" : pos;
+
+        const topJogos = Object.entries(p.jogosVencidos)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 5);
+
+        const detalhe = `
         <div class="player-detail">
           <h4>📊 ESTATÍSTICAS</h4>
           <div class="stat-row"><span>Partidas jogadas</span><strong>${p.partidasJogadas}</strong></div>
@@ -638,8 +1098,8 @@
           ` : ""}
         </div>
       `;
-  
-      return `
+
+        return `
         <div class="player-card ${podiumClass}" onclick="this.classList.toggle('expanded')">
           <div class="position">${medal}</div>
           <div class="player-info">
@@ -657,36 +1117,47 @@
           ${detalhe}
         </div>
       `;
-    }).join("");
-  }
-
-  function renderHistory(encounters) {
-    const container = document.getElementById("history-list");
-    const dates = Object.keys(encounters).sort((a, b) => b.localeCompare(a));
-
-    if (!dates.length) {
-      container.innerHTML = '<div class="loading">Nenhum encontro registrado ainda.</div>';
-      return;
+      }).join("");
     }
 
-    container.innerHTML = dates.map(data => {
-      const enc = encounters[data];
-      const presentes = Array.from(enc.presentes).sort();
+    function renderHistory(encounters, capas) {
+      const container = document.getElementById("history-list");
+      const dates = Object.keys(encounters).sort((a, b) => b.localeCompare(a));
 
-      const partidasHtml = enc.partidas.length ? enc.partidas.map(p => `
+      if (!dates.length) {
+        container.innerHTML = '<div class="loading">Nenhum encontro registrado ainda.</div>';
+        return;
+      }
+
+      container.innerHTML = dates.map(data => {
+        const enc = encounters[data];
+        const presentes = Array.from(enc.presentes).sort();
+
+        const partidasSorted = [...enc.partidas].sort((a, b) => a.jogo.localeCompare(b.jogo, "pt"));
+
+        const partidasHtml = partidasSorted.length ? partidasSorted.map(p => {
+          const capaUrl = capas && capas[p.jogo];
+          const coverHtml = capaUrl
+            ? `<img class="history-game-cover" src="${escapeHtml(capaUrl)}" alt="${escapeHtml(p.jogo)}" loading="lazy" onerror="this.outerHTML='<div class=\\'history-game-cover-placeholder\\'>🎲</div>'">`
+            : `<div class="history-game-cover-placeholder">🎲</div>`;
+          return `
         <div class="history-game">
-          <div class="history-game-header">
-            <span class="history-game-name">🎲 ${escapeHtml(p.jogo)}</span>
-            <span class="history-game-meta">${p.minutos > 0 ? p.minutos + " min" : ""}</span>
-          </div>
-          <div class="history-game-detail">
-            <span class="history-winner">🏆 ${escapeHtml(p.vencedor)}</span> venceu
-            ${p.participantes.length ? ` · jogaram: ${p.participantes.map(escapeHtml).join(", ")}` : ""}
+          ${coverHtml}
+          <div class="history-game-body">
+            <div class="history-game-header">
+              <span class="history-game-name">${escapeHtml(p.jogo)}</span>
+              <span class="history-game-meta">${p.minutos > 0 ? p.minutos + " min" : ""}</span>
+            </div>
+            <div class="history-game-detail">
+              <span class="history-winner">🏆 ${escapeHtml(p.vencedor)}</span> venceu
+              ${p.participantes.length ? ` · jogaram: ${p.participantes.map(escapeHtml).join(", ")}` : ""}
+            </div>
           </div>
         </div>
-      `).join("") : '<div class="history-game-detail" style="padding: 8px 0;">Sem partidas registradas neste encontro.</div>';
+      `;
+        }).join("") : '<div class="history-game-detail" style="padding: 8px 0;">Sem partidas registradas neste encontro.</div>';
 
-      return `
+        return `
         <div class="history-encounter">
           <div class="history-date">📅 ${formatDate(data)}</div>
           ${enc.evento ? `<div class="history-event-name">${escapeHtml(enc.evento)}</div>` : ""}
@@ -696,37 +1167,37 @@
           ${partidasHtml}
         </div>
       `;
-    }).join("");
-  }
-
-  function renderStats(ranking, encounters, capas) {
-    const container = document.getElementById("stats-content");
-
-    if (!ranking.length) {
-      container.innerHTML = '<div class="loading">Sem dados para estatísticas ainda.</div>';
-      return;
+      }).join("");
     }
 
-    const jogosCount = {};
-    Object.values(encounters).forEach(enc => {
-      enc.partidas.forEach(p => {
-        if (!jogosCount[p.jogo]) jogosCount[p.jogo] = { partidas: 0, jogadores: 0, tempoTotal: 0 };
-        jogosCount[p.jogo].partidas++;
-        jogosCount[p.jogo].jogadores += p.participantes.length;
-        jogosCount[p.jogo].tempoTotal += p.minutos;
+    function renderStats(ranking, encounters, capas) {
+      const container = document.getElementById("stats-content");
+
+      if (!ranking.length) {
+        container.innerHTML = '<div class="loading">Sem dados para estatísticas ainda.</div>';
+        return;
+      }
+
+      const jogosCount = {};
+      Object.values(encounters).forEach(enc => {
+        enc.partidas.forEach(p => {
+          if (!jogosCount[p.jogo]) jogosCount[p.jogo] = { partidas: 0, jogadores: 0, tempoTotal: 0 };
+          jogosCount[p.jogo].partidas++;
+          jogosCount[p.jogo].jogadores += p.participantes.length;
+          jogosCount[p.jogo].tempoTotal += p.minutos;
+        });
       });
-    });
-    const topJogos = Object.entries(jogosCount).sort((a, b) => b[1].partidas - a[1].partidas);
+      const topJogos = Object.entries(jogosCount).sort((a, b) => b[1].partidas - a[1].partidas);
 
-    const totalPartidas = Object.values(encounters).reduce((s, e) => s + e.partidas.length, 0);
-    const totalEncontros = Object.keys(encounters).length;
+      const totalPartidas = Object.values(encounters).reduce((s, e) => s + e.partidas.length, 0);
+      const totalEncontros = Object.keys(encounters).length;
 
-    const maioresTaxas = ranking
-      .filter(p => p.partidasJogadas >= 3)
-      .sort((a, b) => b.taxaVitoria - a.taxaVitoria)
-      .slice(0, 5);
+      const maioresTaxas = ranking
+        .filter(p => p.partidasJogadas >= 3)
+        .sort((a, b) => b.taxaVitoria - a.taxaVitoria)
+        .slice(0, 5);
 
-    container.innerHTML = `
+      container.innerHTML = `
       <div class="stat-card">
         <div class="stat-card-title">🎯 NÚMEROS DA TEMPORADA</div>
         <div class="stat-row-game">
@@ -747,11 +1218,11 @@
         <div class="stat-card">
           <div class="stat-card-title">🎲 JOGOS MAIS POPULARES</div>
           ${topJogos.map(([jogo, dados]) => {
-            const capaUrl = capas[jogo];
-            const thumbHtml = capaUrl
-              ? `<img class="game-cover-thumb" src="${escapeHtml(capaUrl)}" alt="${escapeHtml(jogo)}" loading="lazy" onerror="this.style.display='none'">`
-              : "";
-            return `
+        const capaUrl = capas[jogo];
+        const thumbHtml = capaUrl
+          ? `<img class="game-cover-thumb" src="${escapeHtml(capaUrl)}" alt="${escapeHtml(jogo)}" loading="lazy" onerror="this.style.display='none'">`
+          : "";
+        return `
             <div class="stat-row-game">
               ${thumbHtml}
               <div style="flex:1;min-width:0">
@@ -760,7 +1231,7 @@
               </div>
               <div class="stat-game-count">${dados.partidas}×</div>
             </div>`;
-          }).join("")}
+      }).join("")}
         </div>
       ` : ""}
 
@@ -780,75 +1251,76 @@
         </div>
       ` : ""}
     `;
-  }
-
-  function formatDate(d) {
-    if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
-      const [y, m, day] = d.split("-");
-      return `${day}/${m}/${y}`;
     }
-    return d;
-  }
 
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
-
-  function showError(msg) {
-    document.getElementById("ranking-list").innerHTML = `<div class="error">${msg}</div>`;
-    document.getElementById("history-list").innerHTML = "";
-    document.getElementById("stats-content").innerHTML = "";
-  }
-
-  document.querySelectorAll(".tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-      tab.classList.add("active");
-      document.getElementById("panel-" + tab.dataset.tab).classList.add("active");
-    });
-  });
-
-  async function loadData() {
-    const urlPresencas = window.SHEET_PRESENCAS_URL;
-    const urlPartidas = window.SHEET_PARTIDAS_URL;
-    const urlJogos = window.SHEET_JOGOS_URL;
-    if (!urlPresencas || urlPresencas.includes("COLE_AQUI") ||
-        !urlPartidas || urlPartidas.includes("COLE_AQUI")) {
-      showError("⚙️ Configure as URLs das planilhas no index.html.");
-      return;
-    }
-    try {
-      const fetches = [fetch(urlPresencas), fetch(urlPartidas)];
-      if (urlJogos) fetches.push(fetch(urlJogos));
-      const resps = await Promise.all(fetches);
-      if (!resps[0].ok || !resps[1].ok) throw new Error("Não foi possível acessar a planilha.");
-      const csvP  = await resps[0].text();
-      const csvPa = await resps[1].text();
-      const presencas = parseCSV(csvP);
-      const partidas  = parseCSV(csvPa);
-
-      const capas = {};
-      if (resps[2] && resps[2].ok) {
-        const csvJ = await resps[2].text();
-        parseCSV(csvJ).forEach(row => {
-          const nome = (row.nome || "").trim();
-          const img  = (row.imagem || "").trim();
-          if (nome && img) capas[nome] = img;
-        });
+    function formatDate(d) {
+      if (/^\d{4}-\d{2}-\d{2}/.test(d)) {
+        const [y, m, day] = d.split("-");
+        return `${day}/${m}/${y}`;
       }
-
-      const { ranking, encounters } = processData(presencas, partidas);
-      renderRanking(ranking);
-      renderHistory(encounters);
-      renderStats(ranking, encounters, capas);
-    } catch (err) {
-      showError("Erro ao carregar dados: " + err.message);
-      console.error(err);
+      return d;
     }
-  }
 
-  loadData();
-</script>
+    function escapeHtml(s) {
+      return String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+    }
+
+    function showError(msg) {
+      document.getElementById("ranking-list").innerHTML = `<div class="error">${msg}</div>`;
+      document.getElementById("history-list").innerHTML = "";
+      document.getElementById("stats-content").innerHTML = "";
+    }
+
+    document.querySelectorAll(".tab").forEach(tab => {
+      tab.addEventListener("click", () => {
+        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+        tab.classList.add("active");
+        document.getElementById("panel-" + tab.dataset.tab).classList.add("active");
+      });
+    });
+
+    async function loadData() {
+      const urlPresencas = window.SHEET_PRESENCAS_URL;
+      const urlPartidas = window.SHEET_PARTIDAS_URL;
+      const urlJogos = window.SHEET_JOGOS_URL;
+      if (!urlPresencas || urlPresencas.includes("COLE_AQUI") ||
+        !urlPartidas || urlPartidas.includes("COLE_AQUI")) {
+        showError("⚙️ Configure as URLs das planilhas no index.html.");
+        return;
+      }
+      try {
+        const fetches = [fetch(urlPresencas), fetch(urlPartidas)];
+        if (urlJogos) fetches.push(fetch(urlJogos));
+        const resps = await Promise.all(fetches);
+        if (!resps[0].ok || !resps[1].ok) throw new Error("Não foi possível acessar a planilha.");
+        const csvP = await resps[0].text();
+        const csvPa = await resps[1].text();
+        const presencas = parseCSV(csvP);
+        const partidas = parseCSV(csvPa);
+
+        const capas = {};
+        if (resps[2] && resps[2].ok) {
+          const csvJ = await resps[2].text();
+          parseCSV(csvJ).forEach(row => {
+            const nome = (row.nome || "").trim();
+            const img = (row.imagem || "").trim();
+            if (nome && img) capas[nome] = img;
+          });
+        }
+
+        const { ranking, encounters } = processData(presencas, partidas);
+        renderRanking(ranking);
+        renderHistory(encounters, capas);
+        renderStats(ranking, encounters, capas);
+      } catch (err) {
+        showError("Erro ao carregar dados: " + err.message);
+        console.error(err);
+      }
+    }
+
+    loadData();
+  </script>
 </body>
+
 </html>
