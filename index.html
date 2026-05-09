@@ -908,10 +908,9 @@
     </header>
 
     <nav class="tabs" role="tablist">
-      <button class="tab" data-tab="ranking">🏆 Ranking</button>
       <button class="tab" data-tab="historico">📜 Histórico</button>
-      <button class="tab" data-tab="stats">📊 Estatísticas</button>
       <button class="tab" data-tab="jogos">🎲 Jogos</button>
+      <button class="tab" data-tab="ranking">🏆 Ranking</button>
       <button class="tab" data-tab="niveis">⚔️ Regras</button>
     </nav>
 
@@ -931,10 +930,7 @@
       <div id="history-list">
         <div class="loading">⏳ carregando histórico...</div>
       </div>
-    </section>
-
-    <section class="panel" id="panel-stats">
-      <h2 class="section-title">Estatísticas</h2>
+      <h2 class="section-title section-spacer">Estatísticas</h2>
       <hr class="section-divider">
       <div id="stats-content">
         <div class="loading">⏳ carregando estatísticas...</div>
@@ -1482,22 +1478,21 @@
         </div>
       ` : ""}
 
-      ${maioresTaxas.length ? `
-        <div class="stat-card">
-          <div class="stat-card-title">🔥 MAIORES TAXAS DE VITÓRIA</div>
-          <div class="stat-game-detail" style="margin-bottom: 10px;">Mínimo de 3 partidas jogadas</div>
-          ${maioresTaxas.map(p => `
-            <div class="stat-row-game">
-              <div>
-                <div class="stat-game-name">${escapeHtml(p.nome)}</div>
-                <div class="stat-game-detail">${p.vitorias} vitórias em ${p.partidasJogadas} partidas</div>
-              </div>
-              <div class="stat-game-count">${p.taxaVitoria}%</div>
-            </div>
-          `).join("")}
-        </div>
-      ` : ""}
     `;
+    // MAIORES TAXAS DE VITÓRIA — oculto
+    // container.innerHTML += maioresTaxas.length ? `
+    //   <div class="stat-card">
+    //     <div class="stat-card-title">🔥 MAIORES TAXAS DE VITÓRIA</div>
+    //     <div class="stat-game-detail" style="margin-bottom: 10px;">Mínimo de 3 partidas jogadas</div>
+    //     ${maioresTaxas.map(p =>
+    //       `<div class="stat-row-game">
+    //         <div>
+    //           <div class="stat-game-name">${escapeHtml(p.nome)}</div>
+    //           <div class="stat-game-detail">${p.vitorias} vitórias em ${p.partidasJogadas} partidas</div>
+    //         </div>
+    //         <div class="stat-game-count">${p.taxaVitoria}%</div>
+    //       </div>`).join("")}
+    //   </div>` : "";
     }
 
     function formatDate(d) {
@@ -1515,14 +1510,14 @@
     function showError(msg) {
       document.getElementById("ranking-list").innerHTML = `<div class="error">${msg}</div>`;
       document.getElementById("history-list").innerHTML = "";
-      document.getElementById("stats-content").innerHTML = "";
+      // stats-content is inside panel-historico; clearing history-list is enough
       document.getElementById("jogos-list").innerHTML = "";
     }
 
-    const VALID_TABS = ["ranking", "historico", "stats", "jogos", "niveis"];
+    const VALID_TABS = ["historico", "jogos", "ranking", "niveis"];
 
     function activateTab(tabId) {
-      const id = VALID_TABS.includes(tabId) ? tabId : "ranking";
+      const id = VALID_TABS.includes(tabId) ? tabId : "historico";
       document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
       document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
       const btn = document.querySelector(`.tab[data-tab="${id}"]`);
