@@ -853,14 +853,14 @@
     </header>
 
     <nav class="tabs" role="tablist">
-      <button class="tab active" data-tab="ranking">🏆 Ranking</button>
+      <button class="tab" data-tab="ranking">🏆 Ranking</button>
       <button class="tab" data-tab="historico">📜 Histórico</button>
       <button class="tab" data-tab="stats">📊 Estatísticas</button>
       <button class="tab" data-tab="jogos">🎲 Jogos</button>
       <button class="tab" data-tab="niveis">⚔️ Regras</button>
     </nav>
 
-    <section class="panel active" id="panel-ranking">
+    <section class="panel" id="panel-ranking">
       <h2 class="section-title">Classificação geral</h2>
       <hr class="section-divider">
       <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 14px;">Toque em um jogador para ver
@@ -887,7 +887,7 @@
     </section>
 
     <section class="panel" id="panel-jogos">
-      <h2 class="section-title">Jogos cadastrados</h2>
+      <h2 class="section-title">Jogos da galera</h2>
       <hr class="section-divider">
       <div id="jogos-list">
         <div class="loading">⏳ carregando jogos...</div>
@@ -1400,14 +1400,29 @@
       document.getElementById("jogos-list").innerHTML = "";
     }
 
+    const VALID_TABS = ["ranking", "historico", "stats", "jogos", "niveis"];
+
+    function activateTab(tabId) {
+      const id = VALID_TABS.includes(tabId) ? tabId : "ranking";
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+      const btn = document.querySelector(`.tab[data-tab="${id}"]`);
+      if (btn) btn.classList.add("active");
+      const panel = document.getElementById("panel-" + id);
+      if (panel) panel.classList.add("active");
+    }
+
     document.querySelectorAll(".tab").forEach(tab => {
       tab.addEventListener("click", () => {
-        document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById("panel-" + tab.dataset.tab).classList.add("active");
+        location.hash = tab.dataset.tab;
       });
     });
+
+    window.addEventListener("hashchange", () => {
+      activateTab(location.hash.replace("#", ""));
+    });
+
+    activateTab(location.hash.replace("#", "") || "ranking");
 
     async function loadData() {
       const urlPresencas = window.SHEET_PRESENCAS_URL;
