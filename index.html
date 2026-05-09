@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jogos Aprisco · Ranking</title>
+  <title>Jogos Aprisco</title>
   <meta name="description" content="Ranking oficial do grupo evangélico de jogos de tabuleiro Aprisco">
-  <meta property="og:title" content="Jogos Aprisco · Ranking">
+  <meta property="og:title" content="Jogos Aprisco">
   <meta property="og:description" content="Acompanhe a temporada 2026 do nosso grupo de jogos de tabuleiro!">
   <link rel="icon"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎲%3C/text%3E%3C/svg%3E">
@@ -904,7 +904,7 @@
     <header class="header">
       <div class="stars">★ ✦ ★</div>
       <h1>JOGOS APRISCO</h1>
-      <div class="subtitle">{ ranking · temporada 2026 }</div>
+      <div class="subtitle">{ temporada 2026 }</div>
     </header>
 
     <nav class="tabs" role="tablist">
@@ -1536,7 +1536,7 @@
       activateTab(location.hash.replace("#", ""));
     });
 
-    activateTab(location.hash.replace("#", "") || "ranking");
+    activateTab(location.hash.replace("#", "") || "historico");
 
     async function loadData() {
       const urlPresencas = window.SHEET_PRESENCAS_URL;
