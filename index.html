@@ -925,15 +925,15 @@
     </section>
 
     <section class="panel" id="panel-historico">
-      <h2 class="section-title">Histórico de encontros</h2>
-      <hr class="section-divider">
-      <div id="history-list">
-        <div class="loading">⏳ carregando histórico...</div>
-      </div>
       <h2 class="section-title section-spacer">Estatísticas</h2>
       <hr class="section-divider">
       <div id="stats-content">
         <div class="loading">⏳ carregando estatísticas...</div>
+      </div>
+      <h2 class="section-title">Histórico de encontros</h2>
+      <hr class="section-divider">
+      <div id="history-list">
+        <div class="loading">⏳ carregando histórico...</div>
       </div>
     </section>
 
@@ -1479,20 +1479,20 @@
       ` : ""}
 
     `;
-    // MAIORES TAXAS DE VITÓRIA — oculto
-    // container.innerHTML += maioresTaxas.length ? `
-    //   <div class="stat-card">
-    //     <div class="stat-card-title">🔥 MAIORES TAXAS DE VITÓRIA</div>
-    //     <div class="stat-game-detail" style="margin-bottom: 10px;">Mínimo de 3 partidas jogadas</div>
-    //     ${maioresTaxas.map(p =>
-    //       `<div class="stat-row-game">
-    //         <div>
-    //           <div class="stat-game-name">${escapeHtml(p.nome)}</div>
-    //           <div class="stat-game-detail">${p.vitorias} vitórias em ${p.partidasJogadas} partidas</div>
-    //         </div>
-    //         <div class="stat-game-count">${p.taxaVitoria}%</div>
-    //       </div>`).join("")}
-    //   </div>` : "";
+      // MAIORES TAXAS DE VITÓRIA — oculto
+      // container.innerHTML += maioresTaxas.length ? `
+      //   <div class="stat-card">
+      //     <div class="stat-card-title">🔥 MAIORES TAXAS DE VITÓRIA</div>
+      //     <div class="stat-game-detail" style="margin-bottom: 10px;">Mínimo de 3 partidas jogadas</div>
+      //     ${maioresTaxas.map(p =>
+      //       `<div class="stat-row-game">
+      //         <div>
+      //           <div class="stat-game-name">${escapeHtml(p.nome)}</div>
+      //           <div class="stat-game-detail">${p.vitorias} vitórias em ${p.partidasJogadas} partidas</div>
+      //         </div>
+      //         <div class="stat-game-count">${p.taxaVitoria}%</div>
+      //       </div>`).join("")}
+      //   </div>` : "";
     }
 
     function formatDate(d) {
