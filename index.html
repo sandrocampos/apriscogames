@@ -1027,7 +1027,7 @@
         <div class="xp-rule">
           <div class="xp-rule-info">
             <div class="xp-rule-title">🐉 Vitória épica</div>
-            <div class="xp-rule-desc">mais de 90 min</div>
+            <div class="xp-rule-desc">mais de 120 min</div>
           </div>
           <div class="xp-rule-value">+3</div>
         </div>
@@ -1075,7 +1075,7 @@
       const m = parseInt(minutes, 10);
       if (isNaN(m) || m <= 0) return 0;
       if (m <= 60) return POINTS.vitoria_rapida;
-      if (m <= 90) return POINTS.vitoria_media;
+      if (m <= 120) return POINTS.vitoria_media;
       return POINTS.vitoria_epica;
     }
 
