@@ -1343,7 +1343,7 @@
           ...j,
           nome: (j.nome || "").trim(),
           imagem: (j.imagem || "").trim(),
-          duracao: (j.duracao || "").trim(),
+          duracao: (j.duracao || j['duração'] || "").trim(),
           jogadores: (j.jogadores || "").trim(),
           donos: (j.donos || "").split(",").map(d => d.trim()).filter(Boolean).sort((a, b) => a.localeCompare(b, "pt")),
         }))
