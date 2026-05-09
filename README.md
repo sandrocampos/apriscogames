@@ -16,13 +16,14 @@ Página estática (`index.html`) que lê duas abas de um Google Sheets publicado
 
 ## Configuração
 
-1. Abra o Google Sheets com as abas `presencas` e `partidas`
+1. Abra o Google Sheets com as abas `presencas`, `partidas` e `jogos`
 2. Publique cada aba em **Arquivo → Compartilhar → Publicar na web → CSV**
-3. Cole as duas URLs no topo do `index.html`:
+3. Cole as três URLs no topo do `index.html`:
 
 ```js
 window.SHEET_PRESENCAS_URL = "https://docs.google.com/...presencas...";
 window.SHEET_PARTIDAS_URL  = "https://docs.google.com/...partidas...";
+window.SHEET_JOGOS_URL     = "https://docs.google.com/...jogos...";
 ```
 
 ## Estrutura das planilhas
@@ -73,7 +74,14 @@ window.SHEET_PARTIDAS_URL  = "https://docs.google.com/...partidas...";
 
 ## Capas dos jogos
 
-Na aba **🎮 Jogos** você pode cadastrar o nome do jogo e a URL da imagem da capa (ex: BoardGameGeek). As capas aparecem como miniaturas na listagem de jogos mais populares. Os dados ficam salvos no `localStorage` do navegador — não precisam de servidor.
+Cadastre as capas diretamente na aba `jogos` do Google Sheets com duas colunas:
+
+| coluna | exemplo |
+|--------|---------|
+| `nome` | `Ticket to Ride` |
+| `imagem` | `https://cf.geekdo-images.com/...` |
+
+As miniaturas aparecem automaticamente na lista de jogos mais populares (📊 Estatísticas) ao carregar a página. Nomes devem ser idênticos aos usados na aba `partidas`.
 
 ## Deploy
 

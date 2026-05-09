@@ -9,10 +9,11 @@
   <meta property="og:description" content="Acompanhe a temporada 2026 do nosso grupo de jogos de tabuleiro!">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎲%3C/text%3E%3C/svg%3E">
 
-  <!-- CONFIG: cole as DUAS URLs CSV publicadas do seu Google Sheets -->
+  <!-- CONFIG: URLs CSV publicadas do Google Sheets -->
   <script>
     window.SHEET_PRESENCAS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=0&single=true&output=csv";
     window.SHEET_PARTIDAS_URL  = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=2096696200&single=true&output=csv";
+    window.SHEET_JOGOS_URL     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGre1leyaoTGyreW6a72tPeAp0u8pg-iG6euCwyV8y7ZFgeqcyZDzwQt1nJ_HtI1r3M1X-hXMa-rEe/pub?gid=205760515&single=true&output=csv";
   </script>
 
   <style>
@@ -318,94 +319,6 @@
       flex-shrink: 0;
     }
 
-    /* ── Jogos (capas) ── */
-    .jogos-form {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px;
-      margin-bottom: 20px;
-      display: grid;
-      gap: 10px;
-    }
-    .jogos-form-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 10px; align-items: end; }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
-    .form-group label { font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.5px; font-family: ui-monospace, monospace; }
-    .form-input {
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 9px 12px;
-      font-family: inherit;
-      font-size: 14px;
-      background: var(--bg);
-      color: var(--text-primary);
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .form-input:focus { border-color: var(--purple-600); }
-    .btn-add {
-      background: var(--purple-600);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 9px 18px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background 0.15s;
-      white-space: nowrap;
-    }
-    .btn-add:hover { background: var(--purple-800); }
-    .jogos-hint { font-size: 12px; color: var(--text-secondary); margin-top: -4px; }
-
-    .jogos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px; }
-    .jogo-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-    }
-    .jogo-card-img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      display: block;
-      background: var(--gray-50);
-    }
-    .jogo-card-img-placeholder {
-      width: 100%;
-      aspect-ratio: 3/4;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      background: var(--gray-50);
-      color: var(--gray-600);
-    }
-    .jogo-card-name {
-      padding: 8px 10px 6px;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-primary);
-      line-height: 1.3;
-    }
-    .btn-remove {
-      position: absolute;
-      top: 6px; right: 6px;
-      background: rgba(0,0,0,0.55);
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 24px; height: 24px;
-      font-size: 13px;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      line-height: 1;
-    }
-    .btn-remove:hover { background: rgba(153,60,29,0.85); }
-
     /* cover thumbnail in stats */
     .stat-row-game .game-cover-thumb {
       width: 36px;
@@ -429,8 +342,6 @@
       .level-card { padding: 14px; gap: 12px; }
       .level-title { font-size: 18px; }
       .history-game-header { flex-direction: column; gap: 2px; }
-      .jogos-form-row { grid-template-columns: 1fr; }
-      .jogos-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
     }
   </style>
 </head>
@@ -448,7 +359,6 @@
       <button class="tab" data-tab="historico">📜 Histórico</button>
       <button class="tab" data-tab="stats">📊 Estatísticas</button>
       <button class="tab" data-tab="niveis">⚔️ Regras</button>
-      <button class="tab" data-tab="jogos">🎮 Jogos</button>
     </nav>
 
     <section class="panel active" id="panel-ranking">
@@ -511,27 +421,6 @@
         <div class="xp-rule"><div class="xp-rule-info"><div class="xp-rule-title">🐉 Vitória épica</div><div class="xp-rule-desc">mais de 90 min</div></div><div class="xp-rule-value">+10</div></div>
         <div class="xp-rule xp-rule-special"><div class="xp-rule-info"><div class="xp-rule-title">✨ Vitória adicional no mesmo dia</div><div class="xp-rule-desc">conta a vitória mais longa do dia · bônus pelas extras</div></div><div class="xp-rule-value">+2 · máx +4</div></div>
       </div>
-    </section>
-
-    <section class="panel" id="panel-jogos">
-      <h2 class="section-title">Capas dos jogos</h2>
-      <hr class="section-divider">
-      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Cadastre a URL da imagem de capa de cada jogo para enriquecer as estatísticas. As informações ficam salvas no seu navegador.</p>
-      <div class="jogos-form">
-        <div class="jogos-form-row">
-          <div class="form-group">
-            <label>NOME DO JOGO</label>
-            <input id="input-jogo-nome" class="form-input" type="text" placeholder="ex: Ticket to Ride" autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label>URL DA IMAGEM</label>
-            <input id="input-jogo-url" class="form-input" type="url" placeholder="https://...">
-          </div>
-          <button class="btn-add" onclick="adicionarCapa()">+ Salvar</button>
-        </div>
-        <div class="jogos-hint">Dica: use a URL da imagem do BoardGameGeek ou outra fonte pública.</div>
-      </div>
-      <div id="jogos-grid" class="jogos-grid"></div>
     </section>
 
     <footer class="footer">
@@ -810,9 +699,7 @@
     }).join("");
   }
 
-  function renderStats(ranking, encounters) {
-    window._lastRankingData = { ranking, encounters };
-    const capas = getCapas();
+  function renderStats(ranking, encounters, capas) {
     const container = document.getElementById("stats-content");
 
     if (!ranking.length) {
@@ -925,26 +812,36 @@
   async function loadData() {
     const urlPresencas = window.SHEET_PRESENCAS_URL;
     const urlPartidas = window.SHEET_PARTIDAS_URL;
+    const urlJogos = window.SHEET_JOGOS_URL;
     if (!urlPresencas || urlPresencas.includes("COLE_AQUI") ||
         !urlPartidas || urlPartidas.includes("COLE_AQUI")) {
-      showError("⚙️ Configure as URLs das duas abas no index.html (SHEET_PRESENCAS_URL e SHEET_PARTIDAS_URL).");
+      showError("⚙️ Configure as URLs das planilhas no index.html.");
       return;
     }
     try {
-      const [respP, respPa] = await Promise.all([
-        fetch(urlPresencas),
-        fetch(urlPartidas),
-      ]);
-      if (!respP.ok || !respPa.ok) throw new Error("Não foi possível acessar a planilha.");
-      const csvP = await respP.text();
-      const csvPa = await respPa.text();
+      const fetches = [fetch(urlPresencas), fetch(urlPartidas)];
+      if (urlJogos) fetches.push(fetch(urlJogos));
+      const resps = await Promise.all(fetches);
+      if (!resps[0].ok || !resps[1].ok) throw new Error("Não foi possível acessar a planilha.");
+      const csvP  = await resps[0].text();
+      const csvPa = await resps[1].text();
       const presencas = parseCSV(csvP);
-      const partidas = parseCSV(csvPa);
+      const partidas  = parseCSV(csvPa);
+
+      const capas = {};
+      if (resps[2] && resps[2].ok) {
+        const csvJ = await resps[2].text();
+        parseCSV(csvJ).forEach(row => {
+          const nome = (row.nome || "").trim();
+          const img  = (row.imagem || "").trim();
+          if (nome && img) capas[nome] = img;
+        });
+      }
+
       const { ranking, encounters } = processData(presencas, partidas);
-      window._lastRankingData = { ranking, encounters };
       renderRanking(ranking);
       renderHistory(encounters);
-      renderStats(ranking, encounters);
+      renderStats(ranking, encounters, capas);
     } catch (err) {
       showError("Erro ao carregar dados: " + err.message);
       console.error(err);
@@ -952,82 +849,6 @@
   }
 
   loadData();
-
-  // ── Capas dos jogos ──────────────────────────────────────────────────────
-
-  const CAPAS_KEY = "aprisco_capas";
-
-  function getCapas() {
-    try { return JSON.parse(localStorage.getItem(CAPAS_KEY) || "{}"); }
-    catch { return {}; }
-  }
-
-  function saveCapas(capas) {
-    localStorage.setItem(CAPAS_KEY, JSON.stringify(capas));
-  }
-
-  function renderJogosGrid() {
-    const capas = getCapas();
-    const grid = document.getElementById("jogos-grid");
-    const nomes = Object.keys(capas).sort((a, b) => a.localeCompare(b, "pt-BR"));
-
-    if (!nomes.length) {
-      grid.innerHTML = '<p style="font-size:13px;color:var(--text-secondary);">Nenhum jogo cadastrado ainda.</p>';
-      return;
-    }
-
-    grid.innerHTML = nomes.map(nome => {
-      const url = capas[nome];
-      const imgHtml = url
-        ? `<img class="jogo-card-img" src="${escapeHtml(url)}" alt="${escapeHtml(nome)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
-          + `<div class="jogo-card-img-placeholder" style="display:none">🎲</div>`
-        : `<div class="jogo-card-img-placeholder">🎲</div>`;
-      return `
-        <div class="jogo-card">
-          ${imgHtml}
-          <div class="jogo-card-name">${escapeHtml(nome)}</div>
-          <button class="btn-remove" title="Remover" onclick="removerCapa(${JSON.stringify(nome)})">✕</button>
-        </div>
-      `;
-    }).join("");
-  }
-
-  function adicionarCapa() {
-    const nomeInput = document.getElementById("input-jogo-nome");
-    const urlInput = document.getElementById("input-jogo-url");
-    const nome = nomeInput.value.trim();
-    const url = urlInput.value.trim();
-    if (!nome) { nomeInput.focus(); return; }
-    const capas = getCapas();
-    capas[nome] = url;
-    saveCapas(capas);
-    nomeInput.value = "";
-    urlInput.value = "";
-    nomeInput.focus();
-    renderJogosGrid();
-    // refresh stats thumbnails if already rendered
-    const statsContent = document.getElementById("stats-content");
-    if (statsContent && !statsContent.querySelector(".loading")) {
-      if (window._lastRankingData) renderStats(window._lastRankingData.ranking, window._lastRankingData.encounters);
-    }
-  }
-
-  function removerCapa(nome) {
-    const capas = getCapas();
-    delete capas[nome];
-    saveCapas(capas);
-    renderJogosGrid();
-    if (window._lastRankingData) renderStats(window._lastRankingData.ranking, window._lastRankingData.encounters);
-  }
-
-  document.getElementById("input-jogo-nome").addEventListener("keydown", e => {
-    if (e.key === "Enter") document.getElementById("input-jogo-url").focus();
-  });
-  document.getElementById("input-jogo-url").addEventListener("keydown", e => {
-    if (e.key === "Enter") adicionarCapa();
-  });
-
-  renderJogosGrid();
 </script>
 </body>
 </html>
