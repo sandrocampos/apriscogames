@@ -840,6 +840,61 @@
         gap: 10px;
       }
     }
+
+    .jogos-filtros {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .jogos-busca {
+      flex: 1;
+      min-width: 160px;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .jogos-busca:focus {
+      border-color: var(--purple-600);
+    }
+
+    .jogos-select {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      background: var(--card-bg);
+      color: var(--text-primary);
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.15s;
+    }
+
+    .jogos-select:focus {
+      border-color: var(--purple-600);
+    }
+
+    .jogos-count {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 14px;
+    }
+
+    .jogos-vazio {
+      padding: 24px 0;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
   </style>
 </head>
 
@@ -889,6 +944,16 @@
     <section class="panel" id="panel-jogos">
       <h2 class="section-title">Jogos da galera</h2>
       <hr class="section-divider">
+      <div class="jogos-filtros">
+        <input id="jogos-busca" class="jogos-busca" type="search" placeholder="🔍 Buscar jogo…" autocomplete="off">
+        <select id="jogos-dono" class="jogos-select">
+          <option value="">👤 Todos os donos</option>
+        </select>
+        <select id="jogos-jogadores" class="jogos-select">
+          <option value="">👥 Nº de jogadores</option>
+        </select>
+      </div>
+      <div id="jogos-count" class="jogos-count"></div>
       <div id="jogos-list">
         <div class="loading">⏳ carregando jogos...</div>
       </div>
@@ -1267,35 +1332,89 @@
 
     function renderJogos(jogos) {
       const container = document.getElementById("jogos-list");
+      const countEl = document.getElementById("jogos-count");
 
       if (!jogos.length) {
         container.innerHTML = '<div class="loading">Nenhum jogo cadastrado ainda.</div>';
         return;
       }
 
-      const sorted = [...jogos].sort((a, b) => a.nome.localeCompare(b.nome, "pt"));
+      const sorted = [...jogos]
+        .map(j => ({
+          ...j,
+          nome: (j.nome || "").trim(),
+          imagem: (j.imagem || "").trim(),
+          duracao: (j.duracao || "").trim(),
+          jogadores: (j.jogadores || "").trim(),
+          donos: (j.donos || "").split(",").map(d => d.trim()).filter(Boolean).sort((a, b) => a.localeCompare(b, "pt")),
+        }))
+        .sort((a, b) => a.nome.localeCompare(b.nome, "pt"));
 
-      container.innerHTML = `<div class="jogos-grid">${sorted.map(j => {
-        const donos = (j.donos || "").split(",").map(d => d.trim()).filter(Boolean).sort((a, b) => a.localeCompare(b, "pt"));
+      // Popula selects com valores únicos
+      const donoSelect = document.getElementById("jogos-dono");
+      const jogadoresSelect = document.getElementById("jogos-jogadores");
+      const todosDonosSalvo = donoSelect.value;
+      const todosJogadoresSalvo = jogadoresSelect.value;
+
+      const todosDonosSet = new Set();
+      const todosJogadoresSet = new Set();
+      sorted.forEach(j => {
+        j.donos.forEach(d => todosDonosSet.add(d));
+        if (j.jogadores) todosJogadoresSet.add(j.jogadores);
+      });
+
+      donoSelect.innerHTML = '<option value="">👤 Todos os donos</option>' +
+        [...todosDonosSet].sort((a, b) => a.localeCompare(b, "pt"))
+          .map(d => `<option value="${escapeHtml(d)}"${d === todosDonosSalvo ? " selected" : ""}>${escapeHtml(d)}</option>`).join("");
+
+      jogadoresSelect.innerHTML = '<option value="">👥 Nº de jogadores</option>' +
+        [...todosJogadoresSet].sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
+          .map(v => `<option value="${escapeHtml(v)}"${v === todosJogadoresSalvo ? " selected" : ""}>${escapeHtml(v)}</option>`).join("");
+
+      function cardHtml(j) {
         const coverHtml = j.imagem
           ? `<img class="jogo-cover" src="${escapeHtml(j.imagem)}" alt="${escapeHtml(j.nome)}" loading="lazy" onerror="this.outerHTML='<div class=\\'jogo-cover-placeholder\\'>🎲</div>'">`
           : `<div class="jogo-cover-placeholder">🎲</div>`;
-        const duracao = (j.duracao || "").trim();
-        const jogadores = (j.jogadores || "").trim();
         return `
           <div class="jogo-card">
             ${coverHtml}
             <div class="jogo-body">
               <div class="jogo-name">${escapeHtml(j.nome)}</div>
               <div class="jogo-meta">
-                ${duracao ? `<span class="jogo-badge">⏱ ${escapeHtml(duracao)}</span>` : ""}
-                ${jogadores ? `<span class="jogo-badge">👥 ${escapeHtml(jogadores)}</span>` : ""}
+                ${j.duracao ? `<span class="jogo-badge">⏱ ${escapeHtml(j.duracao)}</span>` : ""}
+                ${j.jogadores ? `<span class="jogo-badge">👥 ${escapeHtml(j.jogadores)}</span>` : ""}
               </div>
-              ${donos.length ? `<div class="jogo-donos"><strong>Dono${donos.length > 1 ? "s" : ""}:</strong> ${donos.map(escapeHtml).join(", ")}</div>` : ""}
+              ${j.donos.length ? `<div class="jogo-donos"><strong>Dono${j.donos.length > 1 ? "s" : ""}:</strong> ${j.donos.map(escapeHtml).join(", ")}</div>` : ""}
             </div>
-          </div>
-        `;
-      }).join("")}</div>`;
+          </div>`;
+      }
+
+      function applyFilters() {
+        const busca = document.getElementById("jogos-busca").value.trim().toLowerCase();
+        const dono = donoSelect.value;
+        const jogadoresFiltro = jogadoresSelect.value;
+
+        const filtered = sorted.filter(j => {
+          if (busca && !j.nome.toLowerCase().includes(busca)) return false;
+          if (dono && !j.donos.includes(dono)) return false;
+          if (jogadoresFiltro && j.jogadores !== jogadoresFiltro) return false;
+          return true;
+        });
+
+        countEl.textContent = filtered.length === sorted.length
+          ? `${sorted.length} jogo${sorted.length !== 1 ? "s" : ""}`
+          : `${filtered.length} de ${sorted.length} jogo${sorted.length !== 1 ? "s" : ""}`;
+
+        container.innerHTML = filtered.length
+          ? `<div class="jogos-grid">${filtered.map(cardHtml).join("")}</div>`
+          : `<div class="jogos-vazio">Nenhum jogo encontrado para os filtros selecionados.</div>`;
+      }
+
+      document.getElementById("jogos-busca").addEventListener("input", applyFilters);
+      donoSelect.addEventListener("change", applyFilters);
+      jogadoresSelect.addEventListener("change", applyFilters);
+
+      applyFilters();
     }
 
     function renderStats(ranking, encounters, capas) {
