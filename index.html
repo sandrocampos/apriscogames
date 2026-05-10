@@ -895,6 +895,24 @@
       color: var(--text-secondary);
       font-size: 14px;
     }
+
+    .jogo-cover-wrap {
+      position: relative;
+    }
+
+    .jogo-donos-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(83, 74, 183, 0.88);
+      color: white;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 5px;
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -945,9 +963,7 @@
         <select id="jogos-dono" class="jogos-select">
           <option value="">👤 Todos os donos</option>
         </select>
-        <select id="jogos-jogadores" class="jogos-select">
-          <option value="">👥 Nº de jogadores</option>
-        </select>
+        <input id="jogos-jogadores" class="jogos-busca" type="number" min="1" max="20" placeholder="👥 Nº jogadores" style="max-width:140px">
         <select id="jogos-duracao" class="jogos-select">
           <option value="">⏱ Duração</option>
         </select>
@@ -1354,15 +1370,12 @@
       const jogadoresSelect = document.getElementById("jogos-jogadores");
       const duracaoSelect = document.getElementById("jogos-duracao");
       const todosDonosSalvo = donoSelect.value;
-      const todosJogadoresSalvo = jogadoresSelect.value;
       const todosDuracaoSalvo = duracaoSelect.value;
 
       const todosDonosSet = new Set();
-      const todosJogadoresSet = new Set();
       const todosDuracaoSet = new Set();
       sorted.forEach(j => {
         j.donos.forEach(d => todosDonosSet.add(d));
-        if (j.jogadores) todosJogadoresSet.add(j.jogadores);
         if (j.duracao) todosDuracaoSet.add(j.duracao);
       });
 
@@ -1370,21 +1383,27 @@
         [...todosDonosSet].sort((a, b) => a.localeCompare(b, "pt"))
           .map(d => `<option value="${escapeHtml(d)}"${d === todosDonosSalvo ? " selected" : ""}>${escapeHtml(d)}</option>`).join("");
 
-      jogadoresSelect.innerHTML = '<option value="">👥 Nº de jogadores</option>' +
-        [...todosJogadoresSet].sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
-          .map(v => `<option value="${escapeHtml(v)}"${v === todosJogadoresSalvo ? " selected" : ""}>${escapeHtml(v)}</option>`).join("");
-
       duracaoSelect.innerHTML = '<option value="">⏱ Duração</option>' +
         [...todosDuracaoSet].sort((a, b) => a.localeCompare(b, "pt", { numeric: true }))
           .map(v => `<option value="${escapeHtml(v)}"${v === todosDuracaoSalvo ? " selected" : ""}>${escapeHtml(v)}</option>`).join("");
+
+      function playerCountMatches(jogadoresStr, input) {
+        const n = parseInt(input, 10);
+        if (isNaN(n) || !jogadoresStr) return false;
+        const match = jogadoresStr.match(/(\d+)\s*[-–]\s*(\d+)/);
+        if (match) return n >= parseInt(match[1], 10) && n <= parseInt(match[2], 10);
+        const single = jogadoresStr.match(/\d+/);
+        return single ? n === parseInt(single[0], 10) : false;
+      }
 
       function cardHtml(j) {
         const coverHtml = j.imagem
           ? `<img class="jogo-cover" src="${escapeHtml(j.imagem)}" alt="${escapeHtml(j.nome)}" loading="lazy" onerror="this.outerHTML='<div class=\\'jogo-cover-placeholder\\'>🎲</div>'">`
           : `<div class="jogo-cover-placeholder">🎲</div>`;
+        const badgeHtml = j.donos.length > 1 ? `<span class="jogo-donos-badge">${j.donos.length}×</span>` : "";
         return `
           <div class="jogo-card">
-            ${coverHtml}
+            <div class="jogo-cover-wrap">${coverHtml}${badgeHtml}</div>
             <div class="jogo-body">
               <div class="jogo-name">${escapeHtml(j.nome)}</div>
               <div class="jogo-meta">
@@ -1399,13 +1418,13 @@
       function applyFilters() {
         const busca = document.getElementById("jogos-busca").value.trim().toLowerCase();
         const dono = donoSelect.value;
-        const jogadoresFiltro = jogadoresSelect.value;
+        const jogadoresInput = jogadoresSelect.value.trim();
         const duracaoFiltro = duracaoSelect.value;
 
         const filtered = sorted.filter(j => {
           if (busca && !j.nome.toLowerCase().includes(busca)) return false;
           if (dono && !j.donos.includes(dono)) return false;
-          if (jogadoresFiltro && j.jogadores !== jogadoresFiltro) return false;
+          if (jogadoresInput && !playerCountMatches(j.jogadores, jogadoresInput)) return false;
           if (duracaoFiltro && j.duracao !== duracaoFiltro) return false;
           return true;
         });
@@ -1421,7 +1440,7 @@
 
       document.getElementById("jogos-busca").addEventListener("input", applyFilters);
       donoSelect.addEventListener("change", applyFilters);
-      jogadoresSelect.addEventListener("change", applyFilters);
+      jogadoresSelect.addEventListener("input", applyFilters);
       duracaoSelect.addEventListener("change", applyFilters);
 
       applyFilters();
