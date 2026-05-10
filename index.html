@@ -1390,7 +1390,7 @@
       function playerCountMatches(jogadoresStr, input) {
         const n = parseInt(input, 10);
         if (isNaN(n) || !jogadoresStr) return false;
-        const match = jogadoresStr.match(/(\d+)\s*[-–]\s*(\d+)/);
+        const match = jogadoresStr.match(/(\d+)\s*(?:[-–]|a)\s*(\d+)/);
         if (match) return n >= parseInt(match[1], 10) && n <= parseInt(match[2], 10);
         const single = jogadoresStr.match(/\d+/);
         return single ? n === parseInt(single[0], 10) : false;
